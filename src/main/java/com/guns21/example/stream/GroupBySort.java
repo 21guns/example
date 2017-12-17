@@ -1,5 +1,9 @@
 package com.guns21.example.stream;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.ToString;
+
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -35,29 +39,13 @@ public class GroupBySort {
         System.err.println(map);
     }
 
+    @Getter
+    @ToString
+    @AllArgsConstructor
     public static class A {
         private int sort;
         private String id;
 
-        public A(int sort, String id) {
-            this.sort = sort;
-            this.id = id;
-        }
 
-        public int getSort() {
-            return sort;
-        }
-
-        public String getId() {
-            return id;
-        }
-
-        @Override
-        public String toString() {
-            return "A{" +
-                    "sort=" + sort +
-                    ", id='" + id + '\'' +
-                    '}';
-        }
     }
 }
