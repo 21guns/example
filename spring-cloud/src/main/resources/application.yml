@@ -1,0 +1,37 @@
+spring:
+  application:
+    name: test
+  rabbitmq:
+    username: guest
+    password: guest
+    port: 5672
+  cloud:
+    stream:
+      rabbit:
+        bindings:
+          event-bus-input:
+            consumer:
+              requeue-rejected: true
+#      kafka:
+#        binder:
+#          brokers: 127.0.0.1:9092
+#          zk-nodes: 127.0.0.1:2181
+#          headers: eventType
+      bindings:
+        event-bus-output:
+          destination: service-event
+          content-type: application/json
+          group: ${spring.application.name}
+        event-bus-input:
+          destination:  service-event
+          content-type: application/json
+          group: ${spring.application.name}
+#          consumer:
+#            max-attempts: 1
+
+#        event-bus-input-ext:
+#          destination: institution-service-event
+#          group: ${spring.application.name}
+#          content-type: application/json
+
+

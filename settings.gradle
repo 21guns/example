@@ -1,2 +1,4 @@
 rootProject.name = 'example'
+include 'spring-cloud'
+include 'java'
 
