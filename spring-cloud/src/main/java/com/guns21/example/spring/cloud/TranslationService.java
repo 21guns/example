@@ -3,6 +3,7 @@ package com.guns21.example.spring.cloud;
 import com.guns21.cloud.event.EventProcessor;
 import com.guns21.event.EventBus;
 import com.guns21.example.spring.cloud.event.AddEvent;
+import com.guns21.example.spring.cloud.event.UpdateEvent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,7 @@ public class TranslationService {
     public String translate(String text, Locale from, Locale to) {
 
         eventBus.publish(new AddEvent(text));
+        eventBus.publish(new UpdateEvent(text));
         return text + ":" + from + "-->" + to;
     }
 

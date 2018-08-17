@@ -20,9 +20,9 @@ public class TranslationCommands {
     // translate "hello world!" --from en_US --to fr_FR
     @ShellMethod("Translate text from one language to another.")
     public String translate(
-      @ShellOption String text,
+      @ShellOption(defaultValue = "en_US")  String text,
       @ShellOption(defaultValue = "en_US") Locale from,
-      @ShellOption Locale to) {
+      @ShellOption(defaultValue = "en_US")  Locale to) {
       // invoke service
       return service.translate(text, from, to);
     }

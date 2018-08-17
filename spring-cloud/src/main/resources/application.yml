@@ -7,11 +7,11 @@ spring:
     port: 5672
   cloud:
     stream:
-      rabbit:
-        bindings:
-          event-bus-input:
-            consumer:
-              requeue-rejected: true
+#      rabbit:
+#        bindings:
+#          event-bus-input:
+#            consumer:
+#              requeue-rejected: true
 #      kafka:
 #        binder:
 #          brokers: 127.0.0.1:9092
@@ -21,13 +21,13 @@ spring:
         event-bus-output:
           destination: service-event
           content-type: application/json
-          group: ${spring.application.name}
         event-bus-input:
           destination:  service-event
           content-type: application/json
           group: ${spring.application.name}
-#          consumer:
-#            max-attempts: 1
+          consumer:
+            max-attempts: 1
+            auto-bind-dlq: true
 
 #        event-bus-input-ext:
 #          destination: institution-service-event
@@ -35,3 +35,7 @@ spring:
 #          content-type: application/json
 
 
+logging:
+  level:
+    org.springframework: info
+    com.guns21: debug
