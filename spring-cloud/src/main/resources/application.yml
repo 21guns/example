@@ -7,12 +7,15 @@ spring:
     port: 5672
   cloud:
     stream:
-#      rabbit:
-#        bindings:
-#          event-bus-input:
-#            consumer:
-#              requeue-rejected: true
-#      kafka:
+      rabbit:
+        bindings:
+          event-input:
+            consumer:
+              requeue-rejected: true
+
+#              auto-bind-dlq: true
+#              republish-to-dlq: true
+      kafka:
 #        binder:
 #          brokers: 127.0.0.1:9092
 #          zk-nodes: 127.0.0.1:2181
@@ -27,7 +30,7 @@ spring:
           group: ${spring.application.name}
           consumer:
             max-attempts: 1
-            auto-bind-dlq: true
+
 
 #        event-bus-input-ext:
 #          destination: institution-service-event
