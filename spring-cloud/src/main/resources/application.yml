@@ -23,10 +23,10 @@ spring:
       bindings:
         event-output:
           destination: service-event
-          content-type: application/json
+#          content-type: application/json
         event-input:
           destination:  service-event
-          content-type: application/json
+#          content-type: application/json
           group: ${spring.application.name}
           consumer:
             max-attempts: 1
