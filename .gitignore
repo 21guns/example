@@ -27,3 +27,5 @@ nbdist/
 
 ### macos ###
 .DS_Store
+
+test.log

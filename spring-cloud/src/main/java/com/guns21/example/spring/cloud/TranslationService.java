@@ -17,8 +17,11 @@ public class TranslationService {
 
     public String translate(String text, Locale from, Locale to) {
 
-        eventBus.publish(new AddEvent(text));
+//        eventBus.publish(new AddEvent(text));
         eventBus.publish(new UpdateEvent(text));
+
+
+//        eventBus.publish(new AddEvent(text),"aa-event");
         return text + ":" + from + "-->" + to;
     }
 

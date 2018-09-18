@@ -11,10 +11,15 @@ spring:
         bindings:
           event-input:
             consumer:
-              requeue-rejected: true
+#              requeue-rejected: true
 
-#              auto-bind-dlq: true
-#              republish-to-dlq: true
+              auto-bind-dlq: true
+              republish-to-dlq: true
+          aa-event:
+            producer:
+              exchangeType: direct
+            consumer:
+              exchangeType: direct
       kafka:
 #        binder:
 #          brokers: 127.0.0.1:9092
@@ -29,7 +34,11 @@ spring:
 #          content-type: application/json
           group: ${spring.application.name}
           consumer:
-            max-attempts: 1
+            max-attempts: 3
+        aa-event:
+          destination:  service-event
+          group: asdfa
+
 
 
 #        event-bus-input-ext:
@@ -40,5 +49,5 @@ spring:
 
 logging:
   level:
-    org.springframework: info
+    org.springframework: debug
     com.guns21: debug
