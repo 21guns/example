@@ -1,15 +1,12 @@
-package com.guns21.example.spring.cloud.consumers;
+package com.guns21.example.spring.cloud.stream.consumers;
 
 import com.guns21.cloud.event.CloudEventConstants;
 import com.guns21.cloud.event.EventBusClient;
 import com.guns21.cloud.event.annotation.EventBusListener;
-import com.guns21.example.spring.EventClient;
-import com.guns21.example.spring.cloud.event.AddEvent;
-import com.guns21.example.spring.cloud.event.UpdateEvent;
+import com.guns21.example.spring.cloud.stream.event.AddEvent;
+import com.guns21.example.spring.cloud.stream.event.UpdateEvent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.cloud.stream.annotation.EnableBinding;
-import org.springframework.cloud.stream.annotation.StreamListener;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.stereotype.Component;
 

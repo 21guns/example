@@ -1,6 +1,6 @@
-package com.guns21.example.spring.cloud.config;
+package com.guns21.example.spring.cloud.stream.config;
 
-import com.guns21.example.spring.cloud.TranslationService;
+import com.guns21.example.spring.cloud.stream.TranslationService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 

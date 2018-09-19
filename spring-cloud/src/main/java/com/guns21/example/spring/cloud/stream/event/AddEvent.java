@@ -1,4 +1,4 @@
-package com.guns21.example.spring.cloud.event;
+package com.guns21.example.spring.cloud.stream.event;
 
 import com.guns21.event.domain.NotifyEvent;
 import lombok.Data;

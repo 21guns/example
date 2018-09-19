@@ -1,4 +1,4 @@
-package com.guns21.example.spring.cloud;
+package com.guns21.example.spring.cloud.stream;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.shell.standard.ShellComponent;
