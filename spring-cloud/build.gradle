@@ -4,6 +4,7 @@ apply from: 'https://raw.githubusercontent.com/21guns/java-gradle/master/spring-
 dependencies {
     compile 'com.guns21.cloud:event:1.0.0'
     compile 'org.springframework.shell:spring-shell-starter:2.0.0.RELEASE'
+    compile 'org.springframework.boot:spring-boot-starter-aop'
     compile('org.springframework.cloud:spring-cloud-stream-binder-rabbit'){
         exclude module: 'spring-webflux'
     }

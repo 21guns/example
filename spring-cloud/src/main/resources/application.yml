@@ -7,6 +7,9 @@ spring:
     port: 5672
   cloud:
     stream:
+      default:
+        consumer:
+          max-attempts: 5
       rabbit:
         bindings:
           event-input:
@@ -20,7 +23,7 @@ spring:
               exchangeType: direct
             consumer:
               exchangeType: direct
-      kafka:
+#      kafka:
 #        binder:
 #          brokers: 127.0.0.1:9092
 #          zk-nodes: 127.0.0.1:2181
@@ -33,8 +36,8 @@ spring:
           destination:  service-event
 #          content-type: application/json
           group: ${spring.application.name}
-          consumer:
-            max-attempts: 3
+#          consumer:
+#            max-attempts: 4
         aa-event:
           destination:  service-event
           group: asdfa
