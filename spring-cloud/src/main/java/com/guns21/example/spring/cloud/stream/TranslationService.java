@@ -1,11 +1,13 @@
 package com.guns21.example.spring.cloud.stream;
 
+import com.guns21.cloud.event.EventBusClient;
 import com.guns21.cloud.event.EventProcessor;
 import com.guns21.event.EventBus;
 import com.guns21.example.spring.cloud.stream.event.UpdateEvent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.validation.BindException;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
@@ -18,6 +20,10 @@ public class TranslationService {
     private EventBus eventBus;
     @Autowired
     private Validator validator;
+
+    @Autowired
+    private EventBusClient busClient;
+
     public String translate(String text, Locale from, Locale to) {
 
 //        eventBus.publish(new AddEvent(text));
@@ -29,9 +35,9 @@ public class TranslationService {
         ValidationUtils.invokeValidator(validator, updateEvent.getSource(),bindException );
 
         System.err.println(bindException);
-        eventBus.publish(updateEvent);
-
-
+//        eventBus.publish(updateEvent);
+        busClient.eventOutput().send(updateEvent.toMessage());
+//        throw new RuntimeException("");
 //        eventBus.publish(new AddEvent(text),"aa-event");
         return text + ":" + from + "-->" + to;
     }
