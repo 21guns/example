@@ -52,5 +52,5 @@ spring:
 
 logging:
   level:
-    org.springframework: debug
+    org.springframework: info
     com.guns21: debug

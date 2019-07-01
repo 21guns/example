@@ -1,13 +1,10 @@
 package com.guns21.example.spring.cloud.stream;
 
-import com.guns21.cloud.event.EventBusClient;
-import com.guns21.cloud.event.EventProcessor;
-import com.guns21.event.EventBus;
+import com.guns21.example.spring.cloud.stream.config.EventClient;
 import com.guns21.example.spring.cloud.stream.event.UpdateEvent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.validation.BindException;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
@@ -15,14 +12,12 @@ import org.springframework.validation.Validator;
 import java.util.Locale;
 
 public class TranslationService {
-    private static final Logger logger = LoggerFactory.getLogger(EventProcessor.class);
-    @Autowired
-    private EventBus eventBus;
+    private static final Logger logger = LoggerFactory.getLogger(TranslationService.class);
     @Autowired
     private Validator validator;
 
     @Autowired
-    private EventBusClient busClient;
+    private EventClient busClient;
 
     public String translate(String text, Locale from, Locale to) {
 
@@ -36,7 +31,7 @@ public class TranslationService {
 
         System.err.println(bindException);
 //        eventBus.publish(updateEvent);
-        busClient.eventOutput().send(updateEvent.toMessage());
+        busClient.output().send(updateEvent.toMessage());
 //        throw new RuntimeException("");
 //        eventBus.publish(new AddEvent(text),"aa-event");
         return text + ":" + from + "-->" + to;

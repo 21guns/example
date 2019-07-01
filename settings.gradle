@@ -1,4 +1,6 @@
 rootProject.name = 'example'
 include 'spring-cloud'
 include 'java'
+include 'open-feign'
+include 'poi'
 
