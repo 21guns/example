@@ -27,5 +27,9 @@ public class TranslationCommands {
       return service.translate(text, from, to);
     }
 
-
+    @ShellMethod("Translate text from one language to another.")
+    public String start() {
+        // invoke service
+        return service.start();
+    }
 }

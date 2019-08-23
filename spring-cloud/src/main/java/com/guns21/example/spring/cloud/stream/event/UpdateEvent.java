@@ -6,11 +6,11 @@ import org.springframework.messaging.Message;
 import org.springframework.messaging.support.MessageBuilder;
 
 
-public class UpdateEvent extends NotifyEvent<Object> {
+public class UpdateEvent extends NotifyEvent<EventDTO> {
     public UpdateEvent() {
     }
 
-    public UpdateEvent(Object source) {
+    public UpdateEvent(EventDTO source) {
         super(source);
     }
 
@@ -18,6 +18,7 @@ public class UpdateEvent extends NotifyEvent<Object> {
         return  new UpdateEvent(source).toMessage();
     }
 
+    @Override
     public Message toMessage() {
         return MessageBuilder.withPayload(this)
                 .setHeader(EVENT_TYPE, this.getEventType())

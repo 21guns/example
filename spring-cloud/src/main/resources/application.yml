@@ -7,17 +7,16 @@ spring:
     port: 5672
   cloud:
     stream:
-      default:
-        consumer:
-          max-attempts: 5
       rabbit:
         bindings:
           event-input:
             consumer:
 #              requeue-rejected: true
-
               auto-bind-dlq: true
               republish-to-dlq: true
+              acknowledge-mode: MANUAL
+              prefetch: 3
+
           aa-event:
             producer:
               exchangeType: direct
@@ -36,7 +35,8 @@ spring:
           destination:  service-event
 #          content-type: application/json
           group: ${spring.application.name}
-#          consumer:
+          consumer:
+            concurrency: 30
 #            max-attempts: 4
         aa-event:
           destination:  service-event
