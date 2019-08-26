@@ -7,9 +7,7 @@ import com.guns21.example.spring.cloud.stream.event.UpdateEvent;
 import com.rabbitmq.client.Channel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.amqp.rabbit.listener.RabbitListenerEndpointRegistry;
 import org.springframework.amqp.support.AmqpHeaders;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.stream.annotation.StreamListener;
 import org.springframework.messaging.handler.annotation.Header;
 import org.springframework.messaging.handler.annotation.Payload;
@@ -31,12 +29,12 @@ public class EventConsumer {
                         @Header(AmqpHeaders.CHANNEL) Channel channel,
                         @Header(AmqpHeaders.DELIVERY_TAG) Long deliveryTag) throws IOException {
 
-        logger.info("get1 event {}",addEvent);
         try {
-            Thread.sleep(500);
+            Thread.sleep(50000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+        logger.info("get1 event {}",addEvent);
 
         switch (addEvent.getSource().getName()) {
             /*

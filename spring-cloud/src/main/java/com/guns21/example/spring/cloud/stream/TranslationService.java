@@ -8,12 +8,15 @@ import org.springframework.amqp.rabbit.listener.MessageListenerContainer;
 import org.springframework.amqp.rabbit.listener.RabbitListenerEndpointRegistry;
 import org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.stream.binding.BindingService;
+import org.springframework.cloud.stream.config.BinderProperties;
 import org.springframework.validation.BindException;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
 import java.util.Collection;
 import java.util.Locale;
+import java.util.Map;
 import java.util.Set;
 
 public class TranslationService {
@@ -23,6 +26,9 @@ public class TranslationService {
 
     @Autowired
     private EventClient busClient;
+
+    @Autowired
+    private BindingService bindingService;
 
     @Autowired
     private RabbitListenerEndpointRegistry rabbitListenerEndpointRegistry;
@@ -39,7 +45,7 @@ public class TranslationService {
 
 //        System.err.println(bindException);
 //        eventBus.publish(updateEvent);
-        for (int i = 0; i < 10000; i++) {
+        for (int i = 0; i < 1; i++) {
             busClient.output().send(updateEvent.toMessage());
 //            busClient.output().send(new UpdateEvent(EventDTO.builder().name("1").build()).toMessage());
 //            busClient.output().send(updateEvent.toMessage());
@@ -54,8 +60,14 @@ public class TranslationService {
     }
 
     public String start() {
-        Set<String> listenerContainerIds = rabbitListenerEndpointRegistry.getListenerContainerIds();
-        Collection<MessageListenerContainer> listenerContainers = rabbitListenerEndpointRegistry.getListenerContainers();
+//        Set<String> listenerContainerIds = rabbitListenerEndpointRegistry.getListenerContainerIds();
+//        Collection<MessageListenerContainer> listenerContainers = rabbitListenerEndpointRegistry.getListenerContainers();
+        bindingService.bindConsumer(busClient.input(), EventClient.INPUT);
+        return "";
+    }
+
+    public String stop() {
+        bindingService.unbindConsumers(EventClient.INPUT);
         return "";
     }
 }

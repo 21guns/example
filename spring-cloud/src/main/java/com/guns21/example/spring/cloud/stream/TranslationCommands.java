@@ -32,4 +32,9 @@ public class TranslationCommands {
         // invoke service
         return service.start();
     }
+    @ShellMethod("Translate text from one language to another.")
+    public String stop() {
+        // invoke service
+        return service.stop();
+    }
 }
