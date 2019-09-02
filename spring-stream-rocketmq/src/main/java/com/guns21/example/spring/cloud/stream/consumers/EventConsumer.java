@@ -4,12 +4,9 @@ import com.guns21.cloud.event.EventConstant;
 import com.guns21.example.spring.cloud.stream.config.EventClient;
 import com.guns21.example.spring.cloud.stream.event.AddEvent;
 import com.guns21.example.spring.cloud.stream.event.UpdateEvent;
-import com.rabbitmq.client.Channel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.amqp.support.AmqpHeaders;
 import org.springframework.cloud.stream.annotation.StreamListener;
-import org.springframework.messaging.handler.annotation.Header;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.stereotype.Component;
 
@@ -19,22 +16,20 @@ import java.io.IOException;
 @Component
 public class EventConsumer {
     private static final Logger logger = LoggerFactory.getLogger(EventConsumer.class);
-//    @StreamListener(target = EventBusClient.INPUT, condition = CloudEventConstants.EVENT_HEADERS_EVENT_TYPE + "'AddEvent'")
+    @StreamListener(target = EventClient.INPUT, condition = EventConstant.EVENT_HEADERS_EVENT_TYPE + "'AddEvent'")
     public void accept(@Payload AddEvent addEvent) {
 
-        logger.info("get event {}",addEvent);
+        logger.warn("AddEvent {}",addEvent);
     }
     @StreamListener(target = EventClient.INPUT, condition = EventConstant.EVENT_HEADERS_EVENT_TYPE + "'UpdateEvent'")
-    public void accept1(@Payload UpdateEvent addEvent,
-                        @Header(AmqpHeaders.CHANNEL) Channel channel,
-                        @Header(AmqpHeaders.DELIVERY_TAG) Long deliveryTag) throws IOException {
+    public void accept1(@Payload UpdateEvent addEvent) throws IOException {
 
 //        try {
 //            Thread.sleep(50000);
 //        } catch (InterruptedException e) {
 //            e.printStackTrace();
 //        }
-        logger.info("get1 event {}",addEvent);
+        logger.info("UpdateEvent {}",addEvent);
 
         switch (addEvent.getSource().getName()) {
             /*
@@ -49,7 +44,7 @@ public class EventConsumer {
                     回退消息
                     requeue = true 回退到源队列
                 */
-                channel.basicNack(deliveryTag, false, false);
+//                channel.basicNack(deliveryTag, false, false);
                 break;
             }
             case "3": {
@@ -58,12 +53,12 @@ public class EventConsumer {
                     1. acknowledge-mode: MANUAL
                     2.channel.basicAck(deliveryTag, false);
                 */
-                channel.basicAck(deliveryTag, false);
+//                channel.basicAck(deliveryTag, false);
                 break;
             }
             default: {
                 System.err.println("Thead[" + Thread.currentThread().getName() +"] unknow type :: "+addEvent.getSource().getName());
-                channel.basicAck(deliveryTag, false);
+//                channel.basicAck(deliveryTag, false);
                 break;
             }
         }

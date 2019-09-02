@@ -1,0 +1,34 @@
+spring:
+  application:
+    name: test
+  cloud:
+    stream:
+      rocketmq:
+        binder:
+          name-server: 127.0.0.1:9876
+        bindings:
+          event-input:
+            consumer:
+#              Message consume retry strategy<br>
+#              * -1,no retry,put into DLQ directly<br>
+#              * 0,broker control retry frequency<br>
+#              * >0,client control retry frequency
+              delayLevelWhenNextConsume: 0
+
+      bindings:
+        event-output:
+          destination: service-event
+        #          content-type: application/json
+        event-input:
+          destination:  service-event
+          #          content-type: application/json
+          group: ${spring.application.name}
+          consumer:
+            concurrency: 30
+#            max-attempts: 4
+
+
+logging:
+  level:
+    org.springframework: info
+    com.guns21: debug
