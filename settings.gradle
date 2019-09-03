@@ -5,4 +5,5 @@ include 'open-feign'
 include 'poi'
 include 'spring-rocketmq'
 include 'spring-stream-rocketmq'
+include 'spring-stream-rabbitmq'
 

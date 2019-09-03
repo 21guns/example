@@ -163,7 +163,7 @@ public class ProducerApplication implements CommandLineRunner {
                 return RocketMQLocalTransactionState.ROLLBACK;
             }
 
-            System.out.printf("    # UNKNOW # Simulating %s related local transaction exec UNKNOWN! \n");
+            System.out.printf("    # UNKNOW # Simulating %s related local transaction exec UNKNOWN! \n", msg.getPayload());
             return RocketMQLocalTransactionState.UNKNOWN;
         }
 

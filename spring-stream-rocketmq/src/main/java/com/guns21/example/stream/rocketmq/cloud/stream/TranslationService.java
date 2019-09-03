@@ -1,8 +1,8 @@
-package com.guns21.example.spring.cloud.stream;
+package com.guns21.example.stream.rocketmq.cloud.stream;
 
-import com.guns21.example.spring.cloud.stream.config.EventClient;
-import com.guns21.example.spring.cloud.stream.event.AddEvent;
-import com.guns21.example.spring.cloud.stream.event.UpdateEvent;
+import com.guns21.example.stream.rocketmq.cloud.stream.config.EventClient;
+import com.guns21.example.stream.rocketmq.cloud.stream.event.AddEvent;
+import com.guns21.example.stream.rocketmq.cloud.stream.event.UpdateEvent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

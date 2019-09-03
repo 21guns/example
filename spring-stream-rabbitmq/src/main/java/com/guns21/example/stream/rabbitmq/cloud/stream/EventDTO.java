@@ -1,4 +1,4 @@
-package com.guns21.example.spring.cloud.stream;
+package com.guns21.example.stream.rabbitmq.cloud.stream;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

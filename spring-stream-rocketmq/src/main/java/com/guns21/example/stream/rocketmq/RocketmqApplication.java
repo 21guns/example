@@ -1,4 +1,4 @@
-package com.guns21.example.spring;
+package com.guns21.example.stream.rocketmq;
 
 
 import org.springframework.boot.autoconfigure.SpringBootApplication;

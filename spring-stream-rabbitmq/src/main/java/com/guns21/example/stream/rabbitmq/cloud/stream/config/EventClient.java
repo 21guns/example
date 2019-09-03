@@ -1,4 +1,4 @@
-package com.guns21.example.spring.cloud.stream.config;
+package com.guns21.example.stream.rabbitmq.cloud.stream.config;
 
 import org.springframework.cloud.stream.annotation.EnableBinding;
 import org.springframework.cloud.stream.annotation.Input;

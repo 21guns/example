@@ -20,13 +20,13 @@ public class FormulaEvaluatorTest {
         System.setProperty("poi.log.level", POILogger.INFO + "");
 
 //        try (InputStream resourceAsStream = ClassLoader.getSystemClassLoader().getResourceAsStream("私户易鑫计算器.xlsx")) {
-           try (Workbook wb1 = WorkbookFactory.create(new File("/Volumes/data/Develop/workspace/21guns/example/poi/src/main/resources/私户易鑫计算器.xlsx"))) {
-           Workbook wb = WorkbookFactory.create(new File("/Volumes/data/Develop/workspace/21guns/example/poi/src/main/resources/私户易鑫计算器.xlsx"));
+           try (Workbook wb = WorkbookFactory.create(new File("/Volumes/data/Develop/workspace/21guns/example/poi/src/main/resources/私户易鑫计算器.xlsx"))) {
+//           Workbook wb = WorkbookFactory.create(new File("/Volumes/data/Develop/workspace/21guns/example/poi/src/main/resources/私户易鑫计算器.xlsx"));
 //            Workbook wb1 = WorkbookFactory.create(resourceAsStream);
             CreationHelper creationHelper = wb.getCreationHelper();
 
             Sheet sheet = wb.getSheetAt(0);
-            Sheet sheet1 = wb1.getSheetAt(0);
+//            Sheet sheet1 = wb1.getSheetAt(0);
             //
             for (DataValidation dataValidation : sheet.getDataValidations()) {
                 CellRangeAddressList regions = dataValidation.getRegions();
