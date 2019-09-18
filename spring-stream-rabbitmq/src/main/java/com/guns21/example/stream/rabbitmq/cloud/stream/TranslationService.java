@@ -1,7 +1,7 @@
 package com.guns21.example.stream.rabbitmq.cloud.stream;
 
+import com.guns21.example.stream.rabbitmq.cloud.stream.config.EventClient;
 import com.guns21.example.stream.rabbitmq.cloud.stream.event.UpdateEvent;
-import com.guns21.example.spring.cloud.stream.config.EventClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.amqp.rabbit.listener.RabbitListenerEndpointRegistry;

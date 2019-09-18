@@ -1,0 +1,5 @@
+apply from: 'https://raw.githubusercontent.com/21guns/java-gradle/2.1.x/spring-boot.gradle'
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+}
