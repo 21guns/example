@@ -1,0 +1,59 @@
+buildscript {
+    ext.aspectjVersion = '1.9.4'
+}
+
+plugins {
+    id "aspectj.gradle" version "0.1.6"
+}
+
+
+//buildscript {
+//    repositories {
+//        maven {
+//            url "https://plugins.gradle.org/m2/"
+//        }
+//    }
+//    dependencies {
+//        classpath "gradle.plugin.aspectj:gradle-aspectj:0.1.6"
+//    }
+//}
+//ext.aspectjVersion = '1.9.4'
+//apply plugin: "aspectj.gradle"
+
+apply from: '/data/Develop/workspace/21guns/gradle/spring-boot.gradle'
+//apply from: 'https://raw.githubusercontent.com/21guns/java-gradle/2.1.x/spring-boot.gradle'
+
+//buildscript {
+//    repositories {
+//        maven {
+//            url "https://maven.eveoh.nl/content/repositories/releases"
+//        }
+//    }
+//
+//    dependencies {
+//        classpath "nl.eveoh:gradle-aspectj:2.0"
+//    }
+//}
+//repositories {
+//    mavenCentral()
+//}
+//
+//apply plugin: 'aspectj'
+
+
+dependencies {
+    compile 'com.guns21.cloud:stream:1.0.0'
+    compile 'org.springframework.shell:spring-shell-starter:2.0.0.RELEASE'
+    compile 'org.springframework.boot:spring-boot-starter-aop'
+    compile 'com.alibaba:fastjson:1.2.28'
+    compile 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.0.1'
+    compile 'com.guns21:support:1.1.2'
+    runtime 'mysql:mysql-connector-java'
+
+
+    compile 'org.springframework:spring-aspects'
+    compile group: 'org.aspectj', name: 'aspectjrt'
+    compile 'org.aspectj:aspectjweaver'
+
+}
+

@@ -1,0 +1,30 @@
+#spring相关
+spring:
+  application:
+    name: ddhc-admin-service
+  servlet:
+    multipart:
+      max-file-size: 10MB
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    url: jdbc:mysql://localhost:3306/demo_ds_master?serverTimezone=UTC&useSSL=false&useUnicode=true&characterEncoding=UTF-8
+    username: root
+    password: 123456
+    driverClassName: com.mysql.jdbc.Driver
+    hikari:
+      poolName: ddhc-pool
+      maximumPoolSize: 5
+      minimumIdle: 3
+      maxLifetime: 2000000
+      connectionTimeout: 30000
+      idleTimeout: 30000
+      dataSourceProperties:
+        # opt for mysql
+        cachePrepStmts: true
+        useServerPrepStmts: true
+        prepStmtCacheSize: 250
+        prepStmtCacheSqlLimit: 2048
+
+mybatis:
+  type-aliases-package: com.guns21.example.dao.spring.boot.entity
+
