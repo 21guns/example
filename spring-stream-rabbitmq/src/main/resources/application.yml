@@ -1,4 +1,6 @@
 spring:
+  main:
+    allow-bean-definition-overriding: true
   application:
     name: test
   rabbitmq:
@@ -9,19 +11,32 @@ spring:
     stream:
       rabbit:
         bindings:
+          event-output:
+            producer:
+#              spring.cloud.stream.rabbit.bindings.requestChannel.producer.routing-key-expression=payload.eventType
+#              The problem is that the payload has already been serialized by the time the message reaches the channel adapter (where the routing key expression is evaluated).
+#              One solution would be to set a message header to the eventType field, before sending the message, and then use:
+#              spring.cloud.stream.rabbit.bindings.requestChannel.producer.routing-key-expression=headers.eventType.
+              routing-key-expression: headers.type
+          a-event-input:
+            consumer:
+              binding-routing-key: a
+          b-event-input:
+            consumer:
+              binding-routing-key: b
           event-input:
             consumer:
-#              requeue-rejected: true
+              #              requeue-rejected: true
               auto-bind-dlq: true
               republish-to-dlq: true
               acknowledge-mode: MANUAL
               prefetch: 3
 
-          aa-event:
-            producer:
-              exchangeType: direct
-            consumer:
-              exchangeType: direct
+#          aa-event:
+#            producer:
+#              exchangeType: direct
+#            consumer:
+#              exchangeType: direct
 #      kafka:
 #        binder:
 #          brokers: 127.0.0.1:9092
@@ -31,16 +46,18 @@ spring:
         event-output:
           destination: service-event
 #          content-type: application/json
-        event-input:
-          destination:  service-event
-#          content-type: application/json
-          group: ${spring.application.name}
-          consumer:
-            concurrency: 30
-#            max-attempts: 4
-        aa-event:
-          destination:  service-event
-          group: asdfa
+#        event-input:
+#          destination: service-event
+#          group: ${spring.application.name}
+#          consumer:
+#            concurrency: 3
+##            max-attempts: 4
+#        a-event-input:
+#          destination: service-event
+#          group: an
+#        b-event-input:
+#          destination: service-event
+#          group: bn
 
 
 

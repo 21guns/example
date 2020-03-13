@@ -1,5 +1,7 @@
 package com.guns21.example.stream.rocketmq.cloud.stream;
 
+import com.guns21.cloud.event.stream.EventWraper;
+import com.guns21.event.domain.BaseEvent;
 import com.guns21.example.stream.rocketmq.cloud.stream.config.EventClient;
 import com.guns21.example.stream.rocketmq.cloud.stream.event.AddEvent;
 import com.guns21.example.stream.rocketmq.cloud.stream.event.UpdateEvent;
@@ -7,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.stream.binding.BindingService;
+import org.springframework.messaging.Message;
 import org.springframework.validation.BindException;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
@@ -37,8 +40,8 @@ public class TranslationService {
 //        System.err.println(bindException);
 //        eventBus.publish(updateEvent);
         for (int i = 0; i < 1; i++) {
-            busClient.output().send(new AddEvent().toMessage());
-            busClient.output().send(updateEvent.toMessage());
+            busClient.output().send(EventWraper.buildMessage(new AddEvent()));
+            busClient.output().send(EventWraper.buildMessage(updateEvent));
 //            busClient.output().send(new UpdateEvent(EventDTO.builder().name("1").build()).toMessage());
 //            busClient.output().send(updateEvent.toMessage());
 //            busClient.output().send(updateEvent.toMessage());
@@ -60,4 +63,5 @@ public class TranslationService {
         bindingService.unbindConsumers(EventClient.INPUT);
         return "";
     }
+
 }

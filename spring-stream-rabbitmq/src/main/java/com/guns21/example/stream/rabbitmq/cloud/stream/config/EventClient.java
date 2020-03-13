@@ -9,12 +9,19 @@ import org.springframework.messaging.SubscribableChannel;
 public interface EventClient {
     String OUTPUT = "event-output";
     String INPUT = "event-input";
+    String A_INPUT = "a-event-input";
+    String B_INPUT = "b-event-input";
 
     @Output(OUTPUT)
     MessageChannel output();
 
     @Input(INPUT)
     SubscribableChannel input();
+
+    @Input(A_INPUT)
+    SubscribableChannel aInput();
+    @Input(B_INPUT)
+    SubscribableChannel bInput();
 
     @EnableBinding(EventClient.class)
     class EventConfig {

@@ -1,5 +1,5 @@
 //apply from: '/data/Develop/workspace/21guns/gradle/spring-boot.gradle'
-apply from: 'https://raw.githubusercontent.com/21guns/java-gradle/2.1.x/spring-boot.gradle'
+apply from: 'https://raw.githubusercontent.com/21guns/java-gradle/2.2.x/spring-boot.gradle'
 
 dependencyManagement {
     imports {
@@ -8,8 +8,8 @@ dependencyManagement {
 }
 
 dependencies {
-    compile 'com.guns21.cloud:stream:1.0.0'
-    compile 'com.guns21:jackjson-mixin:1.0.0'
+    compile 'com.guns21.cloud:event:2.0.0'
+    compile 'com.guns21:jackjson-mixin:2.0.0'
     compile 'org.springframework.shell:spring-shell-starter:2.0.0.RELEASE'
     compile 'org.springframework.boot:spring-boot-starter-aop'
 //    compile 'org.springframework.boot:spring-boot-autoconfigure'

@@ -1,14 +1,15 @@
 package com.guns21.example.stream.rabbitmq.cloud.stream.event;
 
-import com.guns21.cloud.event.domain.NotifyEvent;
-import lombok.Data;
-import lombok.ToString;
+import com.guns21.event.domain.NotifyEvent;
+import com.guns21.example.stream.rabbitmq.cloud.stream.EventDTO;
 
-public class AddEvent extends NotifyEvent<Object> {
+public class AddEvent extends NotifyEvent<EventDTO> {
     public AddEvent() {
     }
 
-    public AddEvent(Object source) {
+    public AddEvent(EventDTO source) {
         super(source);
     }
+
 }
+

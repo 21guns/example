@@ -1,5 +1,6 @@
 package com.guns21.example.spring.cloud.stream;
 
+import com.guns21.cloud.event.stream.EventWraper;
 import com.guns21.example.spring.cloud.stream.config.EventClient;
 import com.guns21.example.spring.cloud.stream.event.UpdateEvent;
 import org.slf4j.Logger;
@@ -46,7 +47,7 @@ public class TranslationService {
 //        System.err.println(bindException);
 //        eventBus.publish(updateEvent);
         for (int i = 0; i < 1; i++) {
-            busClient.output().send(updateEvent.toMessage());
+            busClient.output().send(EventWraper.buildMessage(updateEvent));
 //            busClient.output().send(new UpdateEvent(EventDTO.builder().name("1").build()).toMessage());
 //            busClient.output().send(updateEvent.toMessage());
 //            busClient.output().send(updateEvent.toMessage());
@@ -70,4 +71,5 @@ public class TranslationService {
         bindingService.unbindConsumers(EventClient.INPUT);
         return "";
     }
+
 }

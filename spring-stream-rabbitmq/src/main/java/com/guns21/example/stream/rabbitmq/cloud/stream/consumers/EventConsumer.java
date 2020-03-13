@@ -24,7 +24,7 @@ public class EventConsumer {
 
         logger.info("get event {}",addEvent);
     }
-    @StreamListener(target = EventClient.INPUT, condition = EventConstant.EVENT_HEADERS_EVENT_TYPE + "'UpdateEvent'")
+//    @StreamListener(target = EventClient.INPUT, condition = EventConstant.EVENT_HEADERS_EVENT_TYPE + "'UpdateEvent'")
     public void accept1(@Payload UpdateEvent addEvent,
                         @Header(AmqpHeaders.CHANNEL) Channel channel,
                         @Header(AmqpHeaders.DELIVERY_TAG) Long deliveryTag) throws IOException {
@@ -34,7 +34,7 @@ public class EventConsumer {
 //        } catch (InterruptedException e) {
 //            e.printStackTrace();
 //        }
-        logger.info("get1 event {}",addEvent);
+        logger.info("+++++++++++++++ event {}",addEvent);
 
         switch (addEvent.getSource().getName()) {
             /*
@@ -69,5 +69,18 @@ public class EventConsumer {
         }
     }
 
+    @StreamListener(target = EventClient.A_INPUT, condition = EventConstant.EVENT_HEADERS_EVENT_TYPE + "'UpdateEvent'")
+    public void acceptA(UpdateEvent addEvent) {
+        logger.info("----AAAA------- event {}",addEvent);
+    }
 
+    @StreamListener(target = EventClient.B_INPUT,
+            condition = EventConstant.EVENT_HEADERS_EVENT_TYPE + "'UpdateEvent' and headers['type']== 'b' ")
+    public void acceptB(UpdateEvent addEvent) {
+        logger.info("-----BBBB----- event {}",addEvent);
+    }
+    @StreamListener(target = EventClient.B_INPUT, condition = EventConstant.EVENT_HEADERS_EVENT_TYPE + "'*'")
+    public void acceptBALL(UpdateEvent addEvent) {
+        logger.info("-----*********----- event {}",addEvent);
+    }
 }
