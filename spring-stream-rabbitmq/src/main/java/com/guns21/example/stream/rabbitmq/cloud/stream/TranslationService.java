@@ -54,6 +54,7 @@ public class TranslationService {
 //            busClient.output().send(updateEvent.toMessage());
             busClient.output().send(toMessage(new UpdateEvent(EventDTO.builder().name("a").build())));
             busClient.output().send(toMessage(new UpdateEvent(EventDTO.builder().name("b").build())));
+            busClient.aOutput().send(toMessage(new UpdateEvent(EventDTO.builder().name("a").build())));
             busClient.output().send(toMessage(new AddEvent(EventDTO.builder().name("b").build())));
             busClient.output().send(toMessage(new AddEvent(EventDTO.builder().name("b").build())));
 //            rabbitTemplate.send("service-event","a",new UpdateEvent(EventDTO.builder().name("b").build()).toMessage());

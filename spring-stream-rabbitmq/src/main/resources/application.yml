@@ -20,17 +20,29 @@ spring:
               routing-key-expression: headers.type
           a-event-input:
             consumer:
+#              binding-routing-key-delimiter: ','
               binding-routing-key: a
+              declare-exchange: false
+#              When true, consume from a queue with a name equal to the group.
+#              Otherwise the queue name is destination.group. This is useful, for example, when using Spring Cloud Stream to consume from an existing RabbitMQ queue.
+              queue-name-group-only: true
+#          a-a-binding-input:
+#            consumer:
+#              queue-name-group-only: true
+#              declare-exchange: false
           b-event-input:
             consumer:
               binding-routing-key: b
-          event-input:
-            consumer:
-              #              requeue-rejected: true
-              auto-bind-dlq: true
-              republish-to-dlq: true
-              acknowledge-mode: MANUAL
-              prefetch: 3
+              declare-exchange: false
+              queue-name-group-only: true
+
+      #          event-input:
+#            consumer:
+#              #requeue-rejected: true
+#              auto-bind-dlq: true
+#              republish-to-dlq: true
+#              acknowledge-mode: MANUAL
+#              prefetch: 3
 
 #          aa-event:
 #            producer:
@@ -44,7 +56,9 @@ spring:
 #          headers: eventType
       bindings:
         event-output:
-          destination: service-event
+          destination: service-output
+        a-event-output:
+          destination: a-output
 #          content-type: application/json
 #        event-input:
 #          destination: service-event
@@ -52,12 +66,16 @@ spring:
 #          consumer:
 #            concurrency: 3
 ##            max-attempts: 4
-#        a-event-input:
-#          destination: service-event
-#          group: an
-#        b-event-input:
-#          destination: service-event
-#          group: bn
+        a-event-input:
+          destination: service-output,a-output
+          group: a-input
+        #添加一个 a-output 到  a-input绑定
+#        a-a-binding-input:
+#          destination: a-output
+#          group: a-input
+        b-event-input:
+          destination: service-output
+          group: b-input
 
 
 
