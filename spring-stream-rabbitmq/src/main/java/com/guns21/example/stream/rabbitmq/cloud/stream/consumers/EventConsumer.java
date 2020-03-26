@@ -71,13 +71,13 @@ public class EventConsumer {
 
     @StreamListener(target = EventClient.A_INPUT, condition = EventConstant.EVENT_HEADERS_EVENT_TYPE + "'UpdateEvent'")
     public void acceptA(UpdateEvent addEvent) {
-        logger.info("----AAAA------- event {}",addEvent);
+        logger.info(" Thread [{}] ----AAAA------- event {}",Thread.currentThread().getName(), addEvent);
     }
 
     @StreamListener(target = EventClient.B_INPUT,
             condition = EventConstant.EVENT_HEADERS_EVENT_TYPE + "'UpdateEvent' and headers['type']== 'b' ")
     public void acceptB(UpdateEvent addEvent) {
-        logger.info("-----BBBB----- event {}",addEvent);
+        logger.info(" Thread [{}] ----BBBB------- event {}",Thread.currentThread().getName(), addEvent);
     }
     @StreamListener(target = EventClient.B_INPUT, condition = EventConstant.EVENT_HEADERS_EVENT_TYPE + "'*'")
     public void acceptBALL(UpdateEvent addEvent) {

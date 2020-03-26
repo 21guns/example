@@ -53,26 +53,29 @@ public class CloudConfig {
     @Bean
     public ReplaceBinding extraBinding1() {
         return new ReplaceBinding("a-event-input", "a-input", Binding.DestinationType.QUEUE,
-                "a-output","#",null);
+                "a-output", "#", null);
     }
 
-
+    /**
+     * 替换exchange 和 queue的绑定关系
+     * 原因：当使用配置进行多个exchange和一个queue进行绑定值，如果指定binding-routing-key=a,
+     *       那么这些个exchange和queue绑定的routing-key都是a
+     *
+     * 使用 ReplaceBinding 声明需要替换的binding关系
+     *  ReplaceBinding.bindingName = 配置文件中spring.cloud.stream.<input>
+     *  ReplaceBinding.destination = queue name
+     *  ReplaceBinding.exchange = exchange name
+     */
     @EventListener
     public void onApplicationEvent(BindingCreatedEvent event) {
-//        Map<String, Optional<Binding>> distinationMap = amqpBindings.stream()
-//                .collect(Collectors.toMap(Binding::getDestination, Optional::ofNullable));
-//        Map<String, Optional<Binding>> exchangeMap = amqpBindings.stream()
-//                .collect(Collectors.toMap(Binding::getExchange, Optional::ofNullable));
         Object source = event.getSource();
+
         if (source instanceof DefaultBinding) {
             DefaultBinding binding = (DefaultBinding) source;
 
             replaceBindings.stream()
                     .filter(replaceBinding -> replaceBinding.getBindingName().equals(binding.getBindingName()))
                     .forEach(replaceBinding -> {
-                        /*
-                         * 替换exchange 和 queue的绑定关系
-                         */
                         try {
                             Object destination = FieldUtils.readField(binding, "val$destination", true);
                             Binding  existingBinding = (Binding) FieldUtils.readField(destination, "binding", true);
@@ -101,8 +104,7 @@ public class CloudConfig {
     }
 
     @Getter
-    public class ReplaceBinding {
-
+    public static class ReplaceBinding {
         private String bindingName;
         private Binding binding;
         public ReplaceBinding(String bindingName, String destination, Binding.DestinationType destinationType, String exchange, String routingKey, Map<String, Object> arguments) {
