@@ -7,6 +7,7 @@ spring:
     username: guest
     password: guest
     port: 5672
+    virtual-host: guns21.example
   cloud:
     stream:
       rabbit:
@@ -26,10 +27,6 @@ spring:
 #              When true, consume from a queue with a name equal to the group.
 #              Otherwise the queue name is destination.group. This is useful, for example, when using Spring Cloud Stream to consume from an existing RabbitMQ queue.
               queue-name-group-only: true
-#          a-a-binding-input:
-#            consumer:
-#              queue-name-group-only: true
-#              declare-exchange: false
           b-event-input:
             consumer:
               binding-routing-key: b
@@ -66,13 +63,11 @@ spring:
 #          consumer:
 #            concurrency: 3
 ##            max-attempts: 4
+        a-self-event-output:
+          destination: a-input
         a-event-input:
-          destination: service-output,a-output
+          destination: service-output,a-output,a-input
           group: a-input
-        #添加一个 a-output 到  a-input绑定
-#        a-a-binding-input:
-#          destination: a-output
-#          group: a-input
         b-event-input:
           destination: service-output
           group: b-input
@@ -84,6 +79,13 @@ spring:
 #          group: ${spring.application.name}
 #          content-type: application/json
 
+com:
+  guns21:
+    cloud:
+      event:
+        output:
+          patterns: '*output2'
+#        logging: false
 
 logging:
   level:

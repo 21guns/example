@@ -55,7 +55,11 @@ public class CloudConfig {
         return new ReplaceBinding("a-event-input", "a-input", Binding.DestinationType.QUEUE,
                 "a-output", "#", null);
     }
-
+    @Bean
+    public ReplaceBinding extraBinding() {
+        return new ReplaceBinding("a-event-input", "a-input", Binding.DestinationType.QUEUE,
+                "a-input", "#", null);
+    }
     /**
      * 替换exchange 和 queue的绑定关系
      * 原因：当使用配置进行多个exchange和一个queue进行绑定值，如果指定binding-routing-key=a,

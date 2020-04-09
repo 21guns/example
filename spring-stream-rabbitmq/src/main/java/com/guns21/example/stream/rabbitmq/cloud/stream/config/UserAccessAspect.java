@@ -20,8 +20,8 @@ import org.springframework.validation.BindException;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
-@Aspect
-@Configuration
+//@Aspect
+//@Configuration
 public class UserAccessAspect {
 
 	private Logger logger = LoggerFactory.getLogger("Event Log Consuming");
@@ -79,8 +79,8 @@ public class UserAccessAspect {
 //
 //	}
 
-	@Bean
-	@GlobalChannelInterceptor(patterns = "*-output", order = -1)
+//	@Bean
+//	@GlobalChannelInterceptor(patterns = "*-output", order = -1)
 	public ChannelInterceptor messageOutputChannelInterceptor() {
 
 		ChannelInterceptor channelInterceptor = new ChannelInterceptor() {
