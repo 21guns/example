@@ -71,7 +71,9 @@ public class EventConsumer {
 
     @StreamListener(target = EventClient.A_INPUT, condition = EventConstant.EVENT_HEADERS_EVENT_TYPE + "'UpdateEvent'")
     public void acceptA(UpdateEvent addEvent) {
+
         logger.info(" Thread [{}] ----AAAA------- event {}",Thread.currentThread().getName(), addEvent);
+//        throw new IllegalStateException();
     }
 
     @StreamListener(target = EventClient.B_INPUT,

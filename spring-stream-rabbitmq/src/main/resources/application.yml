@@ -84,10 +84,12 @@ com:
     cloud:
       event:
         output:
-          patterns: '*output2'
-#        logging: false
+#          patterns: '*'
+        logging: false
 
 logging:
   level:
-    org.springframework: info
-    com.guns21: debug
+#    root: DEBUG
+#    org.springframework: info
+    com.guns21.cloud.event: debug
+#  config: /Users/jliu/Develop/workspace/21guns/example/spring-stream-rabbitmq/src/main/resources/logback_admin.xml
