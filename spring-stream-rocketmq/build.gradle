@@ -1,24 +1,24 @@
 //apply from: '/data/Develop/workspace/21guns/gradle/spring-boot.gradle'
-apply from: 'https://raw.githubusercontent.com/21guns/java-gradle/2.2.x/spring-boot.gradle'
+apply from: 'https://raw.githubusercontent.com/21guns/java-gradle/2.x.x/spring-boot.gradle'
 
 dependencyManagement {
     imports {
-        mavenBom "com.alibaba.cloud:spring-cloud-alibaba-dependencies:2.1.0.RELEASE"
+        mavenBom "com.alibaba.cloud:spring-cloud-alibaba-dependencies:2.2.3.RELEASE"
     }
 }
 
 dependencies {
-    compile 'com.guns21.cloud:event:2.0.0'
-    compile 'com.guns21:jackjson-mixin:2.0.0'
-    compile 'org.springframework.shell:spring-shell-starter:2.0.0.RELEASE'
-    compile 'org.springframework.boot:spring-boot-starter-aop'
-//    compile 'org.springframework.boot:spring-boot-autoconfigure'
-    compile 'com.alibaba:fastjson:1.2.28'
-//    compile('org.springframework.cloud:spring-cloud-stream-binder-rabbit'){
+    implementation 'com.guns21.cloud:event:2.0.0'
+    implementation 'com.guns21:jackjson-mixin:2.0.0'
+    implementation 'org.springframework.shell:spring-shell-starter:2.0.0.RELEASE'
+    implementation 'org.springframework.boot:spring-boot-starter-aop'
+//    implementation 'org.springframework.boot:spring-boot-autoconfigure'
+    implementation 'com.alibaba:fastjson:1.2.28'
+//    implementation('org.springframework.cloud:spring-cloud-stream-binder-rabbit'){
 //        exclude module: 'spring-webflux'
 //    }
 
-    compile 'com.alibaba.cloud:spring-cloud-starter-stream-rocketmq'
+    implementation 'com.alibaba.cloud:spring-cloud-starter-stream-rocketmq'
 
 
 

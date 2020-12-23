@@ -7,6 +7,12 @@ import com.guns21.example.stream.rabbitmq.cloud.stream.config.EventClient;
 import com.rabbitmq.client.Channel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.amqp.core.ExchangeTypes;
+import org.springframework.amqp.core.Message;
+import org.springframework.amqp.rabbit.annotation.Exchange;
+import org.springframework.amqp.rabbit.annotation.Queue;
+import org.springframework.amqp.rabbit.annotation.QueueBinding;
+import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.amqp.support.AmqpHeaders;
 import org.springframework.cloud.stream.annotation.StreamListener;
 import org.springframework.messaging.handler.annotation.Header;
@@ -14,6 +20,7 @@ import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 
 //@EnableBinding(EventClient.class)
 @Component
@@ -69,7 +76,7 @@ public class EventConsumer {
         }
     }
 
-    @StreamListener(target = EventClient.A_INPUT, condition = EventConstant.EVENT_HEADERS_EVENT_TYPE + "'UpdateEvent'")
+//    @StreamListener(target = EventClient.A_INPUT, condition = EventConstant.EVENT_HEADERS_EVENT_TYPE + "'UpdateEvent'")
     public void acceptA(UpdateEvent addEvent) {
 
         logger.info(" Thread [{}] ----AAAA------- event {}",Thread.currentThread().getName(), addEvent);
@@ -81,8 +88,20 @@ public class EventConsumer {
     public void acceptB(UpdateEvent addEvent) {
         logger.info(" Thread [{}] ----BBBB------- event {}",Thread.currentThread().getName(), addEvent);
     }
-    @StreamListener(target = EventClient.B_INPUT, condition = EventConstant.EVENT_HEADERS_EVENT_TYPE + "'*'")
+//    @StreamListener(target = EventClient.B_INPUT, condition = EventConstant.EVENT_HEADERS_EVENT_TYPE + "'*'")
     public void acceptBALL(UpdateEvent addEvent) {
         logger.info("-----*********----- event {}",addEvent);
+    }
+
+    @RabbitListener(bindings = @QueueBinding(
+            value = @Queue(name = "b-input", durable = "true"),
+            exchange = @Exchange(name = "service-output",
+                    type = ExchangeTypes.TOPIC,
+                    ignoreDeclarationExceptions = "false"),
+            key = {"#"})
+    )
+    public void acceptRabbitEvent(Message message, Channel channel) {
+        logger.info("headers{} ", message.getMessageProperties().getHeaders());
+        logger.info("-----*********----- event {}",new String(message.getBody(), StandardCharsets.UTF_8));
     }
 }

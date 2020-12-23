@@ -50,13 +50,14 @@ public class TranslationService {
 
 //        System.err.println(bindException);
 //        eventBus.publish(updateEvent);
+        logger.info("send evetn");
         for (int i = 0; i < 1; i++) {
 //            busClient.output().send(toMessage(new UpdateEvent(EventDTO.builder().name("a").build())));
 //            busClient.output().send(toMessage(new UpdateEvent(EventDTO.builder().name("b").build())));
-//            busClient.aOutput().send(toMessage(new UpdateEvent(EventDTO.builder().name("a").build())));
+            busClient.output().send(toMessage(new UpdateEvent(EventDTO.builder().name("bbb").build())));
 //            busClient.output().send(toMessage(new AddEvent(EventDTO.builder().name("b").build())));
 //            busClient.output().send(toMessage(new AddEvent(EventDTO.builder().name("b").build())));
-            busClient.aSelfOutput().send(toMessage(new UpdateEvent(EventDTO.builder().name("a").build())));
+//            busClient.aSelfOutput().send(toMessage(new UpdateEvent(EventDTO.builder().name("a").build())));
 //            rabbitTemplate.send("service-event","a",new UpdateEvent(EventDTO.builder().name("b").build()).toMessage());
 
         }

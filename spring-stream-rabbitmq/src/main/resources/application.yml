@@ -68,9 +68,11 @@ spring:
         a-event-input:
           destination: service-output,a-output,a-input
           group: a-input
-        b-event-input:
-          destination: service-output
-          group: b-input
+          consumer:
+            concurrency: 3
+#        b-event-input:
+#          destination: service-output
+#          group: b-input
 
 
 
@@ -87,9 +89,9 @@ com:
 #          patterns: '*'
         logging: false
 
-logging:
-  level:
+#logging:
+#  level:
 #    root: DEBUG
 #    org.springframework: info
-    com.guns21.cloud.event: debug
+#    com.guns21.cloud.event: debug
 #  config: /Users/jliu/Develop/workspace/21guns/example/spring-stream-rabbitmq/src/main/resources/logback_admin.xml
